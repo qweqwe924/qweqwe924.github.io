@@ -1,6 +1,4 @@
-# Admob
 google.com, pub-8769468274871614, DIRECT, f08c47fec0942fa0
-#Unity Ads
 adagio.io, 1522, RESELLER
 adform.com, 3400, RESELLER, 9f5210a2f0999e32
 admanmedia.com, 2242, RESELLER
