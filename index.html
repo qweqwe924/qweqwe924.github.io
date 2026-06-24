@@ -3,46 +3,598 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Welcome</title>
+  <meta name="description" content="Block Burst is a colorful block puzzle adventure. Place pieces, clear lines, and enjoy a bright puzzle challenge on Google Play.">
+  <meta property="og:title" content="Block Burst - Puzzle Adventure">
+  <meta property="og:description" content="A bright, relaxing block puzzle adventure for quick plays and satisfying clears.">
+  <meta property="og:image" content="assets/block-burst-promo.png">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <title>Block Burst - Puzzle Adventure</title>
   <style>
+    :root {
+      --leaf: #2f8c45;
+      --deep: #17371f;
+      --mint: #ddf7bb;
+      --cream: #fff9df;
+      --teal: #18c6d0;
+      --coral: #ff6555;
+      --sun: #ffc846;
+      --violet: #8a58e6;
+      --shadow: 0 22px 70px rgba(31, 88, 42, 0.24);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #4f8cff, #7b61ff);
-      color: white;
-      text-align: center;
-    }
-
-    .card {
-      padding: 40px;
-      max-width: 520px;
-    }
-
-    h1 {
-      font-size: 40px;
-      margin-bottom: 12px;
-    }
-
-    p {
-      font-size: 18px;
-      opacity: 0.9;
+      font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+      color: var(--deep);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255, 200, 70, 0.28), transparent 30rem),
+        radial-gradient(circle at 86% 18%, rgba(24, 198, 208, 0.18), transparent 28rem),
+        linear-gradient(180deg, #efffce 0%, #f9ffe7 48%, #e4f8d8 100%);
     }
 
     a {
-      color: white;
-      text-decoration: underline;
+      color: inherit;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 86vh;
+      overflow: hidden;
+      display: grid;
+      align-items: end;
+      isolation: isolate;
+      background-color: #dff6b9;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background:
+        linear-gradient(90deg, rgba(16, 45, 24, 0.68) 0%, rgba(16, 45, 24, 0.38) 34%, rgba(16, 45, 24, 0.04) 68%),
+        linear-gradient(0deg, rgba(14, 50, 24, 0.58) 0%, rgba(14, 50, 24, 0) 42%),
+        url("assets/block-burst-promo.png") center / cover no-repeat;
+      transform: scale(1.01);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 13rem;
+      z-index: -2;
+      background: linear-gradient(0deg, #f6ffe5 0%, rgba(246, 255, 229, 0) 100%);
+    }
+
+    .nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.1rem max(1.25rem, calc((100vw - 1180px) / 2));
+      color: #ffffff;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.72rem;
+      font-weight: 900;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    .brand-mark {
+      width: 2.4rem;
+      height: 2.4rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.18rem;
+      padding: 0.22rem;
+      border-radius: 0.52rem;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+    }
+
+    .brand-mark span {
+      border-radius: 0.26rem;
+      box-shadow: inset 0 -0.14rem 0 rgba(0, 0, 0, 0.14);
+    }
+
+    .brand-mark span:nth-child(1) {
+      background: var(--coral);
+    }
+
+    .brand-mark span:nth-child(2) {
+      background: var(--teal);
+    }
+
+    .brand-mark span:nth-child(3) {
+      background: var(--sun);
+    }
+
+    .brand-mark span:nth-child(4) {
+      background: var(--violet);
+    }
+
+    .nav-download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.75rem;
+      padding: 0 1.1rem;
+      border-radius: 999px;
+      color: #17371f;
+      font-size: 0.95rem;
+      font-weight: 900;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+      white-space: nowrap;
+    }
+
+    .nav-download:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+    }
+
+    .hero-content {
+      width: min(1180px, calc(100% - 2.5rem));
+      margin: 0 auto;
+      padding: 8.8rem 0 5.4rem;
+      color: #ffffff;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      margin: 0 0 1rem;
+      padding: 0.48rem 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.48);
+      border-radius: 999px;
+      background: rgba(23, 55, 31, 0.22);
+      backdrop-filter: blur(10px);
+      font-size: 0.86rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 39rem;
+      margin: 0;
+      color: #ffffff;
+      font-size: 4.85rem;
+      line-height: 0.92;
+      text-shadow: 0 5px 22px rgba(0, 0, 0, 0.34);
+    }
+
+    .hero-copy {
+      max-width: 35rem;
+      margin: 1.2rem 0 0;
+      color: rgba(255, 255, 255, 0.93);
+      font-size: 1.26rem;
+      line-height: 1.55;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.32);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    .play-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.74rem;
+      min-height: 4rem;
+      padding: 0.65rem 1.35rem 0.65rem 1rem;
+      border-radius: 1.05rem;
+      color: #152814;
+      font-weight: 900;
+      text-decoration: none;
+      background: #ffffff;
+      box-shadow: 0 16px 42px rgba(0, 0, 0, 0.28);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .play-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.34);
+    }
+
+    .play-icon {
+      position: relative;
+      width: 2.54rem;
+      height: 2.54rem;
+      flex: 0 0 auto;
+      border-radius: 0.72rem;
+      background:
+        linear-gradient(135deg, var(--teal) 0 42%, transparent 42%),
+        linear-gradient(45deg, var(--sun) 0 48%, transparent 48%),
+        linear-gradient(225deg, var(--coral) 0 46%, var(--violet) 46%);
+      box-shadow: inset 0 -0.18rem 0 rgba(0, 0, 0, 0.16);
+    }
+
+    .play-button small,
+    .play-button strong {
+      display: block;
+    }
+
+    .play-button small {
+      color: #53705b;
+      font-size: 0.78rem;
+      line-height: 1.1;
+    }
+
+    .play-button strong {
+      margin-top: 0.12rem;
+      font-size: 1.15rem;
+      line-height: 1.1;
+    }
+
+    .quick-note {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.98rem;
+      font-weight: 800;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      margin-top: -2.2rem;
+      padding: 0 1.25rem 4.6rem;
+    }
+
+    .feature-strip {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .feature {
+      min-height: 10.25rem;
+      padding: 1.35rem;
+      border: 1px solid rgba(75, 148, 66, 0.2);
+      border-radius: 0.5rem;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .feature-token {
+      width: 3rem;
+      height: 3rem;
+      margin-bottom: 1rem;
+      border-radius: 0.52rem;
+      box-shadow: inset 0 -0.24rem 0 rgba(0, 0, 0, 0.18), 0 10px 20px rgba(37, 82, 38, 0.14);
+    }
+
+    .feature:nth-child(1) .feature-token {
+      background: linear-gradient(145deg, #21d3d9, #0ea4cc);
+    }
+
+    .feature:nth-child(2) .feature-token {
+      background: linear-gradient(145deg, #ff7861, #ff4f4e);
+    }
+
+    .feature:nth-child(3) .feature-token {
+      background: linear-gradient(145deg, #ffd65d, #ff9c2d);
+    }
+
+    .feature h2 {
+      margin: 0;
+      font-size: 1.22rem;
+      line-height: 1.2;
+    }
+
+    .feature p {
+      margin: 0.6rem 0 0;
+      color: #546a50;
+      font-size: 0.98rem;
+      line-height: 1.55;
+    }
+
+    .showcase {
+      width: min(1180px, 100%);
+      margin: 3.2rem auto 0;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .showcase-image {
+      overflow: hidden;
+      border: 0.5rem solid rgba(255, 255, 255, 0.85);
+      border-radius: 0.8rem;
+      box-shadow: var(--shadow);
+      background: #dff6b9;
+    }
+
+    .showcase-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .showcase-text {
+      padding: 0.5rem 0;
+    }
+
+    .showcase-text h2 {
+      margin: 0;
+      font-size: 2.6rem;
+      line-height: 1.05;
+    }
+
+    .showcase-text p {
+      margin: 1rem 0 0;
+      color: #4d664b;
+      font-size: 1.08rem;
+      line-height: 1.7;
+    }
+
+    .mini-board {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.28rem;
+      width: min(17.5rem, 100%);
+      margin-top: 1.6rem;
+      padding: 0.5rem;
+      border-radius: 0.7rem;
+      background: #46613f;
+      box-shadow: inset 0 0 0 0.18rem #4b2d25, 0 18px 34px rgba(35, 75, 35, 0.18);
+    }
+
+    .mini-board span {
+      aspect-ratio: 1;
+      border-radius: 0.25rem;
+      background: rgba(233, 255, 219, 0.44);
+    }
+
+    .mini-board .c1 {
+      background: #18c6d0;
+    }
+
+    .mini-board .c2 {
+      background: #7dde2e;
+    }
+
+    .mini-board .c3 {
+      background: #ffc846;
+    }
+
+    .mini-board .c4 {
+      background: #ff6555;
+    }
+
+    .mini-board .c5 {
+      background: #8a58e6;
+    }
+
+    .corner-link {
+      position: fixed;
+      right: max(0.9rem, env(safe-area-inset-right));
+      bottom: max(0.9rem, env(safe-area-inset-bottom));
+      z-index: 10;
+      padding: 0.5rem 0.7rem;
+      border-radius: 999px;
+      color: rgba(23, 55, 31, 0.72);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.74);
+      box-shadow: 0 8px 24px rgba(35, 75, 35, 0.16);
+      backdrop-filter: blur(10px);
+    }
+
+    .corner-link:hover {
+      color: var(--deep);
+      background: #ffffff;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        min-height: 82vh;
+      }
+
+      .hero::before {
+        background:
+          linear-gradient(180deg, rgba(16, 45, 24, 0.52) 0%, rgba(16, 45, 24, 0.24) 42%, rgba(16, 45, 24, 0.64) 100%),
+          url("assets/block-burst-promo.png") center / cover no-repeat;
+      }
+
+      .nav {
+        padding: 0.9rem 1rem;
+      }
+
+      .hero-content {
+        width: min(100% - 2rem, 42rem);
+        padding: 7.2rem 0 4.8rem;
+      }
+
+      h1 {
+        max-width: 34rem;
+        font-size: 3.55rem;
+      }
+
+      .hero-copy {
+        max-width: 31rem;
+        font-size: 1.08rem;
+      }
+
+      .feature-strip,
+      .showcase {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase {
+        gap: 1.6rem;
+      }
+
+      .showcase-text h2 {
+        font-size: 2.1rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .nav-download {
+        display: none;
+      }
+
+      .brand {
+        font-size: 0.95rem;
+      }
+
+      .brand-mark {
+        width: 2.1rem;
+        height: 2.1rem;
+      }
+
+      .hero {
+        min-height: 80vh;
+      }
+
+      .hero::before {
+        background:
+          linear-gradient(180deg, rgba(16, 45, 24, 0.36) 0%, rgba(16, 45, 24, 0.14) 38%, rgba(16, 45, 24, 0.76) 100%),
+          url("assets/block-burst-promo.png") 58% center / cover no-repeat;
+      }
+
+      .hero-content {
+        padding: 6.5rem 0 4.3rem;
+      }
+
+      .eyebrow {
+        font-size: 0.76rem;
+      }
+
+      h1 {
+        font-size: 2.72rem;
+        line-height: 0.96;
+      }
+
+      .hero-copy {
+        font-size: 1rem;
+      }
+
+      .play-button {
+        width: 100%;
+        max-width: 20rem;
+        min-height: 3.85rem;
+      }
+
+      .quick-note {
+        width: 100%;
+      }
+
+      .content {
+        padding-bottom: 3.6rem;
+      }
+
+      .feature {
+        min-height: auto;
+      }
+
+      .showcase-text h2 {
+        font-size: 1.85rem;
+      }
+
+      .corner-link {
+        font-size: 0.72rem;
+      }
     }
   </style>
 </head>
 <body>
-  <main class="card">
-    <h1>Welcome</h1>
-    <p>Thanks for visiting qweqwe924.github.io.</p>
-    <p><a href="/app-ads.txt">View app-ads.txt</a></p>
+  <header class="hero">
+    <nav class="nav" aria-label="Primary">
+      <div class="brand" aria-label="Block Burst">
+        <span class="brand-mark" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <span>Block Burst</span>
+      </div>
+      <a class="nav-download" href="https://play.google.com/store/apps/details?id=com.ethan.blockpuzzle" rel="noopener">Download</a>
+    </nav>
+
+    <div class="hero-content">
+      <p class="eyebrow">Puzzle Adventure</p>
+      <h1>Block Burst</h1>
+      <p class="hero-copy">A bright block puzzle adventure with cozy forest charm, colorful pieces, and deeply satisfying clears.</p>
+      <div class="hero-actions">
+        <a class="play-button" href="https://play.google.com/store/apps/details?id=com.ethan.blockpuzzle" rel="noopener" aria-label="Download Block Burst on Google Play">
+          <span class="play-icon" aria-hidden="true"></span>
+          <span>
+            <small>Get it on</small>
+            <strong>Google Play</strong>
+          </span>
+        </a>
+        <span class="quick-note">Place blocks. Clear lines. Chase a cleaner board.</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="feature-strip" aria-label="Game highlights">
+      <article class="feature">
+        <div class="feature-token" aria-hidden="true"></div>
+        <h2>Simple to Start</h2>
+        <p>Drag blocks onto the board and find the perfect spot. Every move feels quick, clear, and rewarding.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-token" aria-hidden="true"></div>
+        <h2>Satisfying Combos</h2>
+        <p>Fill rows and columns to burst pieces away, open space, and keep your puzzle run alive.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-token" aria-hidden="true"></div>
+        <h2>Relaxing Adventure</h2>
+        <p>Soft colors, playful characters, and friendly puzzle pacing make each session easy to enjoy.</p>
+      </article>
+    </section>
+
+    <section class="showcase" aria-label="Block Burst preview">
+      <div class="showcase-image">
+        <img src="assets/block-burst-promo.png" alt="Block Burst puzzle board with colorful block pieces and forest adventure artwork">
+      </div>
+      <div class="showcase-text">
+        <h2>Colorful block strategy for every spare moment.</h2>
+        <p>Block Burst turns classic block placement into a cheerful puzzle adventure. Plan ahead, make room for the next shape, and enjoy each burst of color as the board opens up.</p>
+        <div class="mini-board" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span class="c4"></span><span class="c4"></span><span></span><span></span>
+          <span class="c1"></span><span></span><span></span><span class="c4"></span><span></span><span></span>
+          <span class="c1"></span><span class="c2"></span><span class="c2"></span><span></span><span class="c5"></span><span></span>
+          <span class="c1"></span><span class="c2"></span><span class="c3"></span><span class="c3"></span><span class="c5"></span><span class="c5"></span>
+          <span class="c1"></span><span class="c3"></span><span class="c3"></span><span></span><span></span><span class="c5"></span>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <a class="corner-link" href="/app-ads.txt">app-ads.txt</a>
 </body>
 </html>
