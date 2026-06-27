@@ -1,4 +1,5 @@
 google.com, pub-8769468274871614, DIRECT, f08c47fec0942fa0
+vungle.com, 6a3fa61c9ef99bc872e37476, DIRECT, c107d686becd2d77
 adagio.io, 1522, RESELLER
 adform.com, 3400, RESELLER, 9f5210a2f0999e32
 admanmedia.com, 2242, RESELLER
