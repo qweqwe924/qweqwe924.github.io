@@ -3,6 +3,10 @@ vungle.com, 6a3fa61c9ef99bc872e37476, DIRECT, c107d686becd2d77
 unity.com, 132357280, DIRECT, 96cabb5fbdde37a7
 smartadserver.com, 4194-OB, RESELLER, 060d053dcf45cbf3
 smartadserver.com, 4194, RESELLER, 060d053dcf45cbf3
+sharethrough.com, 4194-OB, RESELLER, 060d053dcf45cbf3
+sharethrough.com, 4194, RESELLER, 060d053dcf45cbf3
+pubmatic.com, 159856, DIRECT, 5d62403b186f2ace
+rubiconproject.com, 22884, DIRECT, 0bfd66d529a55807
 adagio.io, 1522, RESELLER
 adform.com, 3400, RESELLER, 9f5210a2f0999e32
 admanmedia.com, 2242, RESELLER
